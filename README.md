@@ -14,11 +14,13 @@ make build-all
 
 Run "current" registry at `localhost:5001`:
 ```
+rm -rf /tmp/registry-current-root-dir
 bin/current-registry serve config/registry/current.yaml
 ```
 
 In another terminal window, run "complete" registry at `localhost:5002`:
 ```
+rm -rf /tmp/registry-complete-root-dir
 bin/complete-registry serve config/registry/complete.yaml
 ```
 
@@ -201,5 +203,22 @@ TODO
 Steps:
 
 ```
-TODO
+# Allow plain http when pointing to local registry (only needed once)
+bin/complete-producer -v debug registry set --tls disabled localhost:5002
+
+# Push an image into registry
+bin/complete-producer -v debug image copy \
+  ghcr.io/distroless/alpine-base:latest \
+  localhost:5002/scenario-18/alpine-base:latest
+
+# Attach an artifact of type "misc" to image, with new manifest type
+echo "hello world" | bin/complete-producer -v debug artifact put --refers \
+  localhost:5002/scenario-18/alpine-base:latest \
+  --annotation org.opencontainers.artifact.type=misc \
+  --manifest-media-type application/vnd.oci.artifact.manifest.v1+json
+
+# Ensure consumer can see list of refers
+bin/complete-consumer -v debug artifact list \
+  localhost:5002/scenario-18/alpine-base:latest \
+  --format '{{ jsonPretty .Manifest}}' | jq
 ```
