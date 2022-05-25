@@ -110,11 +110,12 @@ bin/intermediate-producer -v copy \
 
 # Attach an artifact of type "misc" to image, with old manifest type, using tags
 # TODO: API check and calculation needs to happen inside the producer
+echo "hello world" > hello.txt
 bin/intermediate-producer -v attach \
   hello.txt \
   text/plain \
-  localhost:5001/scenario-8/alpine-base:latest \
-  localhost:5001/scenario-8/alpine-base:${TAG}
+  misc \
+  localhost:5001/scenario-8/alpine-base:latest
 
 # Get refs
 # TODO: intermediate-consumer cannot fallback to tags yet
@@ -154,6 +155,7 @@ bin/intermediate-producer -v copy \
   localhost:5002/scenario-11/alpine-base:latest
 
 # Attach an artifact of type "misc" to image, with old manifest type
+echo "hello world" > hello.txt
 bin/intermediate-producer -v attach \
   hello.txt \
   text/plain \
