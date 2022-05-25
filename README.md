@@ -153,7 +153,20 @@ TODO
 Steps:
 
 ```
-TODO
+# Allow plain http when pointing to local registry (only needed once)
+bin/complete-producer -v debug registry set --tls disabled localhost:5001
+
+# Push an image into registry
+bin/complete-producer -v debug image copy \
+  ghcr.io/distroless/alpine-base:latest \
+  localhost:5001/scenario-13/alpine-base:latest
+
+# Attach an artifact of type "misc" to image, with new manifest type
+# Should fail with "MANIFEST_INVALID"
+echo "hello world" | bin/complete-producer -v debug artifact put --refers \
+  localhost:5001/scenario-13/alpine-base:latest \
+  --annotation org.opencontainers.artifact.type=misc \
+  --manifest-media-type application/vnd.oci.artifact.manifest.v1+json
 ```
 
 ### 14: 🌲 --> 🚲 --> 🐿
@@ -163,7 +176,20 @@ TODO
 Steps:
 
 ```
-TODO
+# Allow plain http when pointing to local registry (only needed once)
+bin/complete-producer -v debug registry set --tls disabled localhost:5001
+
+# Push an image into registry
+bin/complete-producer -v debug image copy \
+  ghcr.io/distroless/alpine-base:latest \
+  localhost:5001/scenario-14/alpine-base:latest
+
+# Attach an artifact of type "misc" to image, with new manifest type
+# Should fail with "MANIFEST_INVALID"
+echo "hello world" | bin/complete-producer -v debug artifact put --refers \
+  localhost:5001/scenario-14/alpine-base:latest \
+  --annotation org.opencontainers.artifact.type=misc \
+  --manifest-media-type application/vnd.oci.artifact.manifest.v1+json
 ```
 
 ### 15: 🌲 --> 🚲 --> 🦫
@@ -173,7 +199,20 @@ TODO
 Steps:
 
 ```
-TODO
+# Allow plain http when pointing to local registry (only needed once)
+bin/complete-producer -v debug registry set --tls disabled localhost:5001
+
+# Push an image into registry
+bin/complete-producer -v debug image copy \
+  ghcr.io/distroless/alpine-base:latest \
+  localhost:5001/scenario-15/alpine-base:latest
+
+# Attach an artifact of type "misc" to image, with new manifest type
+# Should fail with "MANIFEST_INVALID"
+echo "hello world" | bin/complete-producer -v debug artifact put --refers \
+  localhost:5001/scenario-15/alpine-base:latest \
+  --annotation org.opencontainers.artifact.type=misc \
+  --manifest-media-type application/vnd.oci.artifact.manifest.v1+json
 ```
 
 ### 16: 🌲 --> 🏍 --> 🐀
