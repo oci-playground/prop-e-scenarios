@@ -164,6 +164,7 @@ TAG="${MANIFEST_SHA}.$(cat hello.txt | shasum -a 256 | cut -c1-16).misc"
 bin/intermediate-producer -v attach \
   hello.txt \
   text/plain \
+  misc \
   localhost:5002/scenario-11/alpine-base:latest \
   localhost:5002/scenario-11/alpine-base:${TAG}
 
