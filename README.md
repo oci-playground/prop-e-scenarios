@@ -1,25 +1,25 @@
 # prop-e-scenarios
 
-See [this doc](https://github.com/opencontainers/wg-reference-types/blob/8ebd9b883889780a407e4a378c7d9bd9bbd34a06/docs/UPGRADING.md) for a complete list of scenarios.
+See [this doc](https://github.com/opencontainers/wg-reference-types/blob/main/docs/UPGRADING.md#proposal-e) for a complete list of icons and scenarios.
 
 ## Setup
 
+Build all components:
+
 ```
-export PATH="${PWD}/bin:${PATH}"
-make clean
-make 🚲 🏍 🐀 🐿 🦫 🌱 🌿 🌲
+make build-all
 ```
 
 ## Start registries
 
 Run "current" registry at `localhost:5001`:
 ```
-🚲 serve config/registry/current.yaml
+bin/current-registry serve config/registry/current.yaml
 ```
 
-Run "complete" registry at `localhost:5002`:
+In another terminal window, run "complete" registry at `localhost:5002`:
 ```
-🏍 serve config/registry/complete.yaml
+bin/complete-registry serve config/registry/complete.yaml
 ```
 
 ## Scenarios
