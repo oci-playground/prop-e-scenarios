@@ -103,7 +103,25 @@ TODO
 Steps:
 
 ```
-TODO
+# Push an image into registry
+bin/intermediate-producer -v copy \
+  ghcr.io/distroless/alpine-base:latest \
+  localhost:5001/scenario-8/alpine-base:latest
+
+# Attach an artifact of type "misc" to image, with old manifest type, using tags
+echo "hello world" > hello.txt
+# TODO: this calculation should happen inside the producer
+MANIFEST_SHA="$(bin/intermediate-producer digest localhost:5001/scenario-8/alpine-base:latest | sed 's/:/-/')"
+TAG="${MANIFEST_SHA}.$(cat hello.txt | shasum -a 256 | cut -c1-16).misc"
+bin/intermediate-producer -v attach \
+  hello.txt \
+  text/plain \
+  localhost:5001/scenario-8/alpine-base:latest \
+  localhost:5001/scenario-8/alpine-base:${TAG}
+
+# Get refs
+# TODO: intermediate-consumer cannot fallback to tags yet
+bin/intermediate-consumer refs localhost:5001/scenario-8/alpine-base:latest | jq
 ```
 
 ### 9: 🌿 --> 🚲 --> 🦫
@@ -133,7 +151,24 @@ TODO
 Steps:
 
 ```
-TODO
+# Push an image into registry
+bin/intermediate-producer -v copy \
+  ghcr.io/distroless/alpine-base:latest \
+  localhost:5002/scenario-11/alpine-base:latest
+
+# Attach an artifact of type "misc" to image, with old manifest type, using tags
+echo "hello world" > hello.txt
+# TODO: this calculation should happen inside the producer
+MANIFEST_SHA="$(bin/intermediate-producer digest localhost:5002/scenario-11/alpine-base:latest | sed 's/:/-/')"
+TAG="${MANIFEST_SHA}.$(cat hello.txt | shasum -a 256 | cut -c1-16).misc"
+bin/intermediate-producer -v attach \
+  hello.txt \
+  text/plain \
+  localhost:5002/scenario-11/alpine-base:latest \
+  localhost:5002/scenario-11/alpine-base:${TAG}
+
+# Get refs
+bin/intermediate-consumer -v refs localhost:5002/scenario-11/alpine-base:latest | jq
 ```
 
 ### 12: 🌿 --> 🏍 --> 🦫
