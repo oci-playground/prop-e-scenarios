@@ -1,5 +1,7 @@
 # prop-e-scenarios
 
+**Archive Notice**: The working group has finished delivering changes to OCI. Any further issues or PRs should be handled in the opencontainers repositories.
+
 See [this doc](https://github.com/opencontainers/wg-reference-types/blob/main/docs/UPGRADING.md#proposal-e) for a complete list of icons and scenarios.
 
 ## Setup
